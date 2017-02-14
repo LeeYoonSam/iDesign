@@ -12,7 +12,7 @@ import rx.Observable;
  * Created by Albert-IM on 13/02/2017.
  */
 
-public interface RemoteServices {
+public interface RemoteApi {
     final static String RELEASE_SERVER = "http://211.110.1.11/";
     final static String DEBUG_SERVER = "http://211.110.1.11/";
 

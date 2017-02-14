@@ -21,18 +21,18 @@ public class ProductRemoteDataSource implements ProductDataSource {
 
     private static final int SERVICE_LATENCY_IN_MILLIS = 2000;
 
-    private final RemoteServices remoteServices;
+    private final RemoteApi remoteApi;
 
-    public static ProductRemoteDataSource getInstance(RemoteServices remoteServices) {
+    public static ProductRemoteDataSource getInstance(RemoteApi remoteApi) {
         if (INSTANCE == null) {
-            INSTANCE = new ProductRemoteDataSource(remoteServices);
+            INSTANCE = new ProductRemoteDataSource(remoteApi);
         }
         return INSTANCE;
     }
 
     // Prevent direct instantiation.
-    private ProductRemoteDataSource(RemoteServices remoteServices) {
-        this.remoteServices = remoteServices;
+    private ProductRemoteDataSource(RemoteApi remoteApi) {
+        this.remoteApi = remoteApi;
     }
 
     @Override
@@ -43,7 +43,7 @@ public class ProductRemoteDataSource implements ProductDataSource {
             @Override
             public void run() {
 
-                remoteServices.getAllProducts()
+                remoteApi.getAllProducts()
                         .subscribeOn(Schedulers.io())
                         .subscribe(new Subscriber<ArrayList<Product>>() {
                             @Override
@@ -62,7 +62,7 @@ public class ProductRemoteDataSource implements ProductDataSource {
                             }
                         });
 
-//                callback.onProductsLoaded(remoteServices.getAllProducts());
+//                callback.onProductsLoaded(remoteApi.getAllProducts());
             }
         }, SERVICE_LATENCY_IN_MILLIS);
     }

@@ -1,12 +1,11 @@
-package com.bup.idesign.act;
+package com.bup.idesign.products;
 
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.bup.idesign.R;
-import com.bup.idesign.products.ProductFrag;
-import com.bup.idesign.products.ProductsPresenter;
+import com.bup.idesign.data.RemoteService;
 import com.bup.idesign.util.ActivityUtils;
 import com.bup.idesign.util.Util;
 
@@ -16,7 +15,7 @@ import butterknife.ButterKnife;
  * Created by Albert-IM on 12/02/2017.
  */
 
-public class ActMainPresenter extends AppCompatActivity {
+public class ProductAct extends AppCompatActivity {
 
     private ProductsPresenter mProductsPresenter;
 
@@ -40,7 +39,7 @@ public class ActMainPresenter extends AppCompatActivity {
         }
 
         // Create the presenter
-        mProductsPresenter = new ProductsPresenter(productFrag);
+        mProductsPresenter = new ProductsPresenter(RemoteService.getInstance(), productFrag);
 
     }
 

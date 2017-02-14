@@ -30,7 +30,7 @@
         </activity>
 
         <activity
-            android:name=".act.ActMainPresenter"
+            android:name=".products.ProductAct"
             android:screenOrientation="portrait">
         </activity>
 

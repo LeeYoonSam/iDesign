@@ -6,6 +6,7 @@ import android.os.Handler;
 import android.support.v7.app.AppCompatActivity;
 
 import com.bup.idesign.R;
+import com.bup.idesign.products.ProductAct;
 
 public class ActIntro extends AppCompatActivity {
 
@@ -24,7 +25,7 @@ public class ActIntro extends AppCompatActivity {
 
     public void moveMain() {
 //        Intent i = new Intent(ActIntro.this, ActMain.class);
-        Intent i = new Intent(ActIntro.this, ActMainPresenter.class);
+        Intent i = new Intent(ActIntro.this, ProductAct.class);
         startActivity(i);
 
         finish();

@@ -3,7 +3,7 @@ package com.bup.idesign;
 import android.app.Application;
 
 import com.bumptech.glide.Glide;
-import com.bup.idesign.data.remote.RemoteServices;
+import com.bup.idesign.data.remote.RemoteApi;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
@@ -58,12 +58,12 @@ public class iDesignApplication extends Application {
                 .create();
 
         Retrofit retrofit = new Retrofit.Builder()
-                .baseUrl(RemoteServices.ENDPOINT)
+                .baseUrl(RemoteApi.ENDPOINT)
                 .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create(gson))
                 .addCallAdapterFactory(RxJavaCallAdapterFactory.create())
                 .build();
 
-        retrofit.create(RemoteServices.class);
+        retrofit.create(RemoteApi.class);
     }
 }

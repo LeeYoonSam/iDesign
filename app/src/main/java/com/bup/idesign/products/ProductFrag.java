@@ -37,6 +37,10 @@ public class ProductFrag extends Fragment implements ProductContract.View {
 
     ArrayList<Product> alProducts = new ArrayList<>();
 
+    ProductContract.Presenter mPresenter;
+
+    boolean isActive = false;
+
     public static ProductFrag newInstance() {
         return new ProductFrag();
     }
@@ -114,6 +118,8 @@ public class ProductFrag extends Fragment implements ProductContract.View {
     @Override
     public void setLoadingIndicator(final boolean active) {
 
+        isActive = active;
+
         swipeRefreshLayout.post(new Runnable() {
             @Override
             public void run() {
@@ -124,26 +130,37 @@ public class ProductFrag extends Fragment implements ProductContract.View {
 
     @Override
     public void showProducts(List<Product> products) {
+        alProducts.clear();
+        alProducts.addAll(products);
 
+        mainProductAdapter.notifyDataSetChanged();
+
+        isActive = false;
     }
 
     @Override
     public void showLoadingProductsError() {
 
+        isActive = false;
     }
 
     @Override
     public void showNoProducts() {
+        alProducts.clear();
+        mainProductAdapter.notifyDataSetChanged();
 
+        isActive = false;
+
+        // show nodata View
     }
 
     @Override
     public boolean isActive() {
-        return false;
+        return isActive;
     }
 
     @Override
     public void setPresenter(ProductContract.Presenter presenter) {
-
+        mPresenter = presenter;
     }
 }

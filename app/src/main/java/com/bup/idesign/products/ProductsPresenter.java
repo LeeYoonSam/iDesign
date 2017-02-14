@@ -4,6 +4,7 @@ import android.support.annotation.NonNull;
 
 import com.bup.idesign.data.ProductDataSource;
 import com.bup.idesign.data.remote.ProductRemoteDataSource;
+import com.bup.idesign.data.remote.RemoteApi;
 import com.bup.idesign.model.Product;
 
 import java.util.ArrayList;
@@ -23,23 +24,27 @@ public class ProductsPresenter implements ProductContract.Presenter {
     private final ProductContract.View mProductsView;
     private ProductRemoteDataSource mProductRemoteDataSource;
 
-//    private final DataManager mDataManager;
+    private final RemoteApi mRemoteApi;
 
     private Subscription mSubscription;
 
     private boolean mFirstLoad = true;
 
-    public ProductsPresenter(@NonNull ProductContract.View productsView) {
-        mProductsView = checkNotNull(productsView, "productsView cannot be null!");
-        mProductsView.setPresenter(this);
-    }
-
-//    public ProductsPresenter(@NonNull DataManager dataManager, @NonNull ProductContract.View productsView) {
-//
-//        mDataManager = checkNotNull(dataManager, "dataManager cannot be null");
+//    public ProductsPresenter(@NonNull ProductContract.View productsView) {
 //        mProductsView = checkNotNull(productsView, "productsView cannot be null!");
 //        mProductsView.setPresenter(this);
 //    }
+
+    public ProductsPresenter(@NonNull RemoteApi remoteApi, @NonNull ProductContract.View productsView) {
+
+        mRemoteApi = checkNotNull(remoteApi, "RemoteApi cannot be null");
+        mProductsView = checkNotNull(productsView, "productsView cannot be null!");
+        mProductsView.setPresenter(this);
+
+        mProductRemoteDataSource = ProductRemoteDataSource.getInstance(remoteApi);
+    }
+
+
 
 //    public ProductsPresenter(@NonNull ProductRemoteDataSource productRemoteDataSource, @NonNull ProductContract.View productsView) {
 //
@@ -63,15 +68,11 @@ public class ProductsPresenter implements ProductContract.Presenter {
     private void processProducts(List<Product> products) {
         if (products.isEmpty()) {
             // Show a message indicating there are no tasks for that filter type.
-            processEmptyTasks();
+            mProductsView.showNoProducts();
         } else {
             // Show the list of tasks
             mProductsView.showProducts(products);
         }
-    }
-
-    private void processEmptyTasks() {
-        mProductsView.showNoProducts();
     }
 
     private void loadProducts(boolean forceUpdate, final boolean showLoadingUI) {
