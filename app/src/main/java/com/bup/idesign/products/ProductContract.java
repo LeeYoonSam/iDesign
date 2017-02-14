@@ -2,6 +2,7 @@ package com.bup.idesign.products;
 
 import com.bup.idesign.BasePresenter;
 import com.bup.idesign.BaseView;
+import com.bup.idesign.model.Book;
 import com.bup.idesign.model.Product;
 
 import java.util.List;
@@ -17,6 +18,7 @@ public class ProductContract {
         void setLoadingIndicator(boolean active);
 
         void showProducts(List<Product> products);
+        void showBooks(List<Book> books);
 
         void showLoadingProductsError();
 
@@ -27,5 +29,6 @@ public class ProductContract {
 
     public interface Presenter extends BasePresenter {
         void loadProducts(boolean forceUpdate);
+        void loadBooks(boolean forceUpdate);
     }
 }

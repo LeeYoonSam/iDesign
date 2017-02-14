@@ -1,6 +1,7 @@
 package com.bup.idesign.data.remote;
 
 import com.bup.idesign.BuildConfig;
+import com.bup.idesign.model.Book;
 import com.bup.idesign.model.Product;
 
 import java.util.ArrayList;
@@ -13,8 +14,8 @@ import rx.Observable;
  */
 
 public interface RemoteApi {
-    final static String RELEASE_SERVER = "http://211.110.1.11/";
-    final static String DEBUG_SERVER = "http://211.110.1.11/";
+    final static String RELEASE_SERVER = "http://0.0.0.0/";
+    final static String DEBUG_SERVER = "http://0.0.0.0/";
 
     // 빌드 타입에 따라 BaseURL 가져오기
     class Setting {
@@ -35,4 +36,7 @@ public interface RemoteApi {
 
     @GET("main")
     Observable<ArrayList<Product>> getAllProducts();
+
+    @GET("api/books/")
+    Observable<ArrayList<Book>> getBooks();
 }

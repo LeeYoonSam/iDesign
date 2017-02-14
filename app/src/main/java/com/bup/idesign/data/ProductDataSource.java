@@ -3,6 +3,7 @@ package com.bup.idesign.data;
 import android.database.Observable;
 import android.support.annotation.NonNull;
 
+import com.bup.idesign.model.Book;
 import com.bup.idesign.model.Product;
 
 import java.util.ArrayList;
@@ -15,6 +16,7 @@ import java.util.List;
 public interface ProductDataSource {
     interface LoadProductsCallback {
 
+        void onBooksLoaded(List<Book> books);
         void onProductsLoaded(List<Product> products);
         void onProductsLoaded(rx.Observable<ArrayList<Product>> products);
 
@@ -30,6 +32,7 @@ public interface ProductDataSource {
     }
 
     void getProducts(@NonNull LoadProductsCallback callback);
+    void getBooks(@NonNull LoadProductsCallback callback);
 
     void getProduct(@NonNull String productSeq, @NonNull GetProductCallback callback);
 

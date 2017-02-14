@@ -5,6 +5,7 @@ import android.support.annotation.NonNull;
 import com.bup.idesign.data.ProductDataSource;
 import com.bup.idesign.data.remote.ProductRemoteDataSource;
 import com.bup.idesign.data.remote.RemoteApi;
+import com.bup.idesign.model.Book;
 import com.bup.idesign.model.Product;
 
 import java.util.ArrayList;
@@ -84,6 +85,78 @@ public class ProductsPresenter implements ProductContract.Presenter {
         }
 
         mProductRemoteDataSource.getProducts(new ProductDataSource.LoadProductsCallback() {
+
+            @Override
+            public void onBooksLoaded(List<Book> books) {
+
+            }
+
+            @Override
+            public void onProductsLoaded(List<Product> products) {
+
+                // The view may not be able to handle UI updates anymore
+                if (!mProductsView.isActive()) {
+                    return;
+                }
+                if (showLoadingUI) {
+                    mProductsView.setLoadingIndicator(false);
+                }
+
+                processProducts(products);
+            }
+
+            @Override
+            public void onProductsLoaded(Observable<ArrayList<Product>> products) {
+            }
+
+            @Override
+            public void onDataNotAvailable() {
+                // The view may not be able to handle UI updates anymore
+                if (!mProductsView.isActive()) {
+                    return;
+                }
+                mProductsView.showLoadingProductsError();
+            }
+        });
+    }
+
+
+
+
+    @Override
+    public void loadBooks(boolean forceUpdate) {
+        loadBooks(forceUpdate || mFirstLoad, true);
+        mFirstLoad = false;
+    }
+
+    private void loadBooks(boolean forceUpdate, final boolean showLoadingUI) {
+        if (showLoadingUI) {
+            mProductsView.setLoadingIndicator(true);
+        }
+        if (forceUpdate) {
+            mProductRemoteDataSource.refreshProducts();
+        }
+
+        mProductRemoteDataSource.getBooks(new ProductDataSource.LoadProductsCallback() {
+
+            @Override
+            public void onBooksLoaded(List<Book> books) {
+                // The view may not be able to handle UI updates anymore
+                if (!mProductsView.isActive()) {
+                    return;
+                }
+                if (showLoadingUI) {
+                    mProductsView.setLoadingIndicator(false);
+                }
+
+                if (books.isEmpty()) {
+                    // Show a message indicating there are no tasks for that filter type.
+                    mProductsView.showNoProducts();
+                } else {
+                    // Show the list of tasks
+                    mProductsView.showBooks(books);
+                }
+            }
 
             @Override
             public void onProductsLoaded(List<Product> products) {

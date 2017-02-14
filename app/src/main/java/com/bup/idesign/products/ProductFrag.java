@@ -14,7 +14,9 @@ import android.widget.Toast;
 
 import com.bup.idesign.R;
 import com.bup.idesign.adapter.MainProductAdapter;
+import com.bup.idesign.model.Book;
 import com.bup.idesign.model.Product;
+import com.bup.idesign.util.LogUtil;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -68,10 +70,14 @@ public class ProductFrag extends Fragment implements ProductContract.View {
             public void onRefresh() {
 //                mPresenter.loadTasks(false);
 
+                mPresenter.loadBooks(true);
+
                 Toast.makeText(getActivity(), "Refresh", Toast.LENGTH_SHORT).show();
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
+
+
 
         return view;
     }
@@ -136,6 +142,11 @@ public class ProductFrag extends Fragment implements ProductContract.View {
         mainProductAdapter.notifyDataSetChanged();
 
         isActive = false;
+    }
+
+    @Override
+    public void showBooks(List<Book> books) {
+        LogUtil.LogD("bookTest", books.get(0).getTitle().toString());
     }
 
     @Override

@@ -4,6 +4,7 @@ import android.os.Handler;
 import android.support.annotation.NonNull;
 
 import com.bup.idesign.data.ProductDataSource;
+import com.bup.idesign.model.Book;
 import com.bup.idesign.model.Product;
 
 import java.util.ArrayList;
@@ -59,6 +60,38 @@ public class ProductRemoteDataSource implements ProductDataSource {
                             @Override
                             public void onNext(ArrayList<Product> products) {
                                 callback.onProductsLoaded(products);
+                            }
+                        });
+
+//                callback.onProductsLoaded(remoteApi.getAllProducts());
+            }
+        }, SERVICE_LATENCY_IN_MILLIS);
+    }
+
+    @Override
+    public void getBooks(final @NonNull LoadProductsCallback callback) {
+        // Simulate network by delaying the execution.
+        Handler handler = new Handler();
+        handler.postDelayed(new Runnable() {
+            @Override
+            public void run() {
+
+                remoteApi.getBooks()
+                        .subscribeOn(Schedulers.io())
+                        .subscribe(new Subscriber<ArrayList<Book>>() {
+                            @Override
+                            public void onCompleted() {
+
+                            }
+
+                            @Override
+                            public void onError(Throwable e) {
+
+                            }
+
+                            @Override
+                            public void onNext(ArrayList<Book> books) {
+                                callback.onBooksLoaded(books);
                             }
                         });
 
