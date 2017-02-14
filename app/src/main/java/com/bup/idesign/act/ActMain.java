@@ -10,7 +10,7 @@ import android.widget.Toast;
 
 import com.bup.idesign.R;
 import com.bup.idesign.adapter.MainProductAdapter;
-import com.bup.idesign.model.ProductModel;
+import com.bup.idesign.model.Product;
 import com.bup.idesign.util.Util;
 
 import java.util.ArrayList;
@@ -29,7 +29,7 @@ public class ActMain extends AppCompatActivity {
 
     MainProductAdapter mainProductAdapter;
 
-    ArrayList<ProductModel> alProductModels = new ArrayList<>();
+    ArrayList<Product> alProducts = new ArrayList<>();
 
     boolean doubleBackToExitPressedOnce = false;
 
@@ -51,30 +51,30 @@ public class ActMain extends AppCompatActivity {
         final GridLayoutManager gridLayoutManager = new GridLayoutManager(this, 2);
         rvMainProduct.setLayoutManager(gridLayoutManager);
 
-        mainProductAdapter = new MainProductAdapter(alProductModels);
+        mainProductAdapter = new MainProductAdapter(alProducts);
         rvMainProduct.setAdapter(mainProductAdapter);
     }
 
     public void getDummyData() {
-        alProductModels.clear();
+        alProducts.clear();
 
-        ProductModel model = new ProductModel();
+        Product model = new Product();
         model.setProductSeq(0);
         model.setProductName("지윤이의 그림 티셔츠");
         model.setProductMainImage("http://blogfiles.naver.net/MjAxNzAyMDRfMTMz/MDAxNDg2MTM5MjM5NjE1.3POcPWupxnaHHwSkPRykE9_A_XLupeb425F2gZ592HEg.Z_OYLS221fiqpyhN-MOiRZKRS7I-pBJMXXdJM5tGer0g.JPEG.yasidaya/1.jpg");
-        alProductModels.add(model);
+        alProducts.add(model);
 
-        model = new ProductModel();
+        model = new Product();
         model.setProductSeq(1);
         model.setProductName("이준이의 그림 액자");
         model.setProductMainImage("http://blogfiles.naver.net/MjAxNzAyMDVfODkg/MDAxNDg2MzA2MTEzMDEx.0xs7t-t9fU8tbX-TPPdkO_ZfiWVebIoliCMuqKuPtfMg.692gBosc3dE5GsP42-SZFcuc7u0p3a_jfT4WnloEqnQg.JPEG.yasidaya/2020-이준이_액자.jpg");
-        alProductModels.add(model);
+        alProducts.add(model);
 
-        model = new ProductModel();
+        model = new Product();
         model.setProductSeq(2);
         model.setProductName("친구의 편지글귀 액자");
         model.setProductMainImage("http://blogfiles.naver.net/MjAxNzAxMjNfNzEg/MDAxNDg1MTc4OTg4MDkz.y5toNG5LRtdZNHy3en0chC81ZmbV47tm2SXCQDnqYlUg.8HOv8EfWK6wSb6Z1EPvRlsIXegBrR7BQqoHesMM6sjgg.JPEG.yasidaya/DSC00108.JPG");
-        alProductModels.add(model);
+        alProducts.add(model);
     }
 
     @Override

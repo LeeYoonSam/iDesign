@@ -29,6 +29,13 @@
             android:screenOrientation="portrait">
         </activity>
 
+        <activity
+            android:name=".act.ActMainPresenter"
+            android:screenOrientation="portrait">
+        </activity>
+
+
+
     </application>
 
 </manifest>

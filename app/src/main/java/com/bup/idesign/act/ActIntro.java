@@ -23,7 +23,8 @@ public class ActIntro extends AppCompatActivity {
     }
 
     public void moveMain() {
-        Intent i = new Intent(ActIntro.this, ActMain.class);
+//        Intent i = new Intent(ActIntro.this, ActMain.class);
+        Intent i = new Intent(ActIntro.this, ActMainPresenter.class);
         startActivity(i);
 
         finish();

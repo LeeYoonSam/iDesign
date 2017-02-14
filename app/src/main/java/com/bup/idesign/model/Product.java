@@ -9,7 +9,7 @@ import java.util.ArrayList;
  * Created by Albert-IM on 12/02/2017.
  */
 
-public class ProductModel implements Parcelable {
+public class Product implements Parcelable {
 
     public int cateSeq;
     public String cateName;
@@ -22,7 +22,7 @@ public class ProductModel implements Parcelable {
 
     public ArrayList<String> productImageList;
 
-    public ProductModel() {
+    public Product() {
         cateSeq = 0;
         cateName = null;
 
@@ -115,7 +115,7 @@ public class ProductModel implements Parcelable {
         dest.writeStringList(productImageList);
     }
 
-    protected ProductModel(Parcel in) {
+    protected Product(Parcel in) {
 
         cateSeq = in.readInt();
         cateName = in.readString();
@@ -128,15 +128,15 @@ public class ProductModel implements Parcelable {
         in.readStringList(productImageList);
     }
 
-    public static final Creator<ProductModel> CREATOR = new Creator<ProductModel>() {
+    public static final Creator<Product> CREATOR = new Creator<Product>() {
         @Override
-        public ProductModel createFromParcel(Parcel in) {
-            return new ProductModel(in);
+        public Product createFromParcel(Parcel in) {
+            return new Product(in);
         }
 
         @Override
-        public ProductModel[] newArray(int size) {
-            return new ProductModel[size];
+        public Product[] newArray(int size) {
+            return new Product[size];
         }
     };
 
